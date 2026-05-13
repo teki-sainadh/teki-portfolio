@@ -1,6 +1,6 @@
 # Teki Sainadh — Developer Portfolio
 
-> Final year B.Tech student shipping real AI-powered products for clients.
+> Final year B.Tech student shipping real AI powered products for clients.
 
 🌐 **Live:** [teki-portfolio.vercel.app](https://teki-portfolio.vercel.app)
 
