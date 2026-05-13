@@ -56,6 +56,6 @@ Deployed on **Vercel** with automatic CI/CD via GitHub.
 
 ## Contact
 
-- 📧 tekisainadh@gmail.com
-- 🔗 [LinkedIn](https://linkedin.com/in/teki-sainadh)
-- 💻 [GitHub](https://github.com/teki-sainadh)
+-  tekisainadh@gmail.com
+-  [LinkedIn](https://linkedin.com/in/teki-sainadh)
+-  [GitHub](https://github.com/teki-sainadh)
