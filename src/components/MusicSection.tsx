@@ -1,149 +1,171 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
-import { PLAYLIST } from '../constants';
-import { motion, AnimatePresence } from 'motion/react';
+import { Persona, Skill, TimelineItem, Project, Award, ProfileBanner } from './types';
+// Import images for consistent Vite processing
+import avatar1 from './assets/images/regenerated_image_1778664555751.png';
+import avatar2 from './assets/images/regenerated_image_1778664557308.png';
+import avatar3 from './assets/images/regenerated_image_1778664558427.png';
+import avatar4 from './assets/images/regenerated_image_1778664559860.png';
+import timeline1 from './assets/images/regenerated_image_1778661883434.png';
+import timeline2 from './assets/images/regenerated_image_1778661672931.png';
 
-export default function MusicSection() {
-  const [currentTrack, setCurrentTrack] = useState<typeof PLAYLIST[0] | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+export const PERSONAS: Persona[] = [
+  {
+    id: 'recruiter',
+    name: 'Recruiter',
+    label: 'Hiring Cloud Engineers',
+    avatar: avatar1,
+    backgroundGif: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqcnN6bXN4NncxeW54NncxeW54NncxeW54NncxeW54NncxeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxS7A9pG7oA/giphy.gif'
+  },
+  {
+    id: 'engineer',
+    name: 'Engineer',
+    label: 'Checking My Stack',
+    avatar: avatar2,
+    backgroundGif: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqcnN6bXN4NncxeW54NncxeW54NncxeW54NncxeW54NncxeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlHFRbmaZtBRhXG/giphy.gif'
+  },
+  {
+    id: 'researcher',
+    name: 'Researcher',
+    label: 'Cloud Solutions',
+    avatar: avatar3,
+    backgroundGif: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqcnN6bXN4NncxeW54NncxeW54NncxeW54NncxeW54NncxeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tn33aiTi1jkl6H6/giphy.gif'
+  },
+  {
+    id: 'guest',
+    name: 'Guest',
+    label: 'Quick View',
+    avatar: avatar4,
+    backgroundGif: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpiazM3Ym5ocjBzNXoycW9hNXoycW9hNXoycW9hNXoycW9hNXoydyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l46C6z7vYdhZpkstO/giphy.gif'
+  }
+];
 
-  // Sync mute state
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.muted = isMuted;
-    }
-  }, [isMuted]);
+export const PROFILE_BANNER: ProfileBanner = {
+  background_url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&h=900&fit=crop',
+  headline: 'Teki Sainadh',
+  resume_url: 'https://drive.google.com/file/d/1nexTMIXC5EEc8ACRe6wZlk1sU1ZZWjbU/view?usp=share_link',
+  linkedin_url: 'https://www.linkedin.com/in/tekisainadh/',
+  profile_summary: 'Aspiring Cloud Engineer specialized in building and deploying scalable web applications using AWS, Firebase, and Supabase. Passionate about efficient backend architectures and reliable cloud systems.'
+};
 
-  // Handle Play/Pause logic
-  useEffect(() => {
-    if (!audioRef.current || !currentTrack) return;
+export const SKILLS: Skill[] = [
+  {
+    id: '1',
+    name: 'AWS (Amplify, EC2, S3)',
+    category: 'Cloud DevOps',
+    description: 'Hands-on experience in cloud infrastructure and deployment.',
+    icon: 'Cloud'
+  },
+  {
+    id: '2',
+    name: 'Python & Java',
+    category: 'Languages',
+    description: 'Versatile backend development and automation scripts.',
+    icon: 'Code'
+  },
+  {
+    id: '3',
+    name: 'Firebase & Supabase',
+    category: 'Backend as Service',
+    description: 'Rapid prototyping and scalable backend management.',
+    icon: 'Server'
+  },
+  {
+    id: '4',
+    name: 'Linux (Ubuntu)',
+    category: 'OS',
+    description: 'Proficient in systems administration and terminal workflows.',
+    icon: 'Terminal'
+  }
+];
 
-    const audio = audioRef.current;
-    if (isPlaying) {
-      if (audio.readyState >= 2) {
-        audio.play().catch(() => {});
-      }
-    } else {
-      audio.pause();
-    }
-  }, [isPlaying, currentTrack]);
+export const PROJECTS: Project[] = [
+  {
+    id: '1',
+    title: 'Teki Chat AI Chatbot',
+    description: 'Fullstack AI chatbot using Groq API (LLaMA3.1 70B) with Reasoning, Coding, and image attachment modes.',
+    tech_stack: ['Groq API', 'Firebase', 'GCP', 'React'],
+    live_url: 'https://tekicodes.tech',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=280&fit=crop',
+    category: 'Binge-Worthy Projects'
+  },
+  {
+    id: '2',
+    title: 'Freelance Finder System',
+    description: 'Discovery web app with AI-based matching, scam filtering, and location-based filtering for 195 countries.',
+    tech_stack: ['AWS Amplify', 'React', 'AI Filtering'],
+    live_url: 'https://main.d2ksk3u0dcg7ts.amplifyapp.com',
+    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=500&h=280&fit=crop',
+    category: 'Trending Now'
+  },
+  {
+    id: '3',
+    title: 'Doctor Patient Management',
+    description: 'Secure appointment booking and payment system with dual dashboards for doctors and admins.',
+    tech_stack: ['Node.js', 'MySQL', 'React', 'Payment Integrations'],
+    image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=500&h=280&fit=crop',
+    category: 'New Releases'
+  }
+];
 
-  const handleTrackSelect = (track: typeof PLAYLIST[0]) => {
-    if (currentTrack?.id === track.id) {
-       setIsPlaying(!isPlaying);
-    } else {
-      setCurrentTrack(track);
-      setIsPlaying(true);
-    }
-  };
+export const TIMELINE: TimelineItem[] = [
+  {
+    id: '1',
+    timeline_type: 'work',
+    name: 'Datacom Cloud',
+    title: 'Workshop Simulation',
+    tech_stack: ['GitHub Actions', 'Cloud Arch', 'CI/CD'],
+    image: timeline1,
+    summary_points: [
+      'Simulated cloud deployment for banking client.',
+      'Designed and deployed application architecture.',
+      'Implemented CI/CD using GitHub Actions.'
+    ],
+    live_url: 'https://www.theforage.com/completion-certificates/gCW7Xki5Y3vNpBmnn/qsuRRyXDZ7Dj2QFx4_gCW7Xki5Y3vNpBmnn_68de4b315a2137c9bf586772_1774415230310_completion_certificate.pdf',
+    date_range: 'March 2026'
+  },
+  {
+    id: '2',
+    timeline_type: 'education',
+    name: 'B V Raju Institute of Technology',
+    title: 'B.Tech in Information Technology',
+    tech_stack: ['CS Core', 'Cloud', 'Data Structures'],
+    image: timeline2,
+    summary_points: [
+      'Focusing on Cloud Technologies and Backend Systems.',
+      'Anticipated completion in April 2026.'
+    ],
+    date_range: '2022 - 2026'
+  }
+];
 
-  const handleError = () => {
-    setIsPlaying(false);
-  };
+export const AWARDS: Award[] = [
+  {
+    id: '1',
+    title: 'UIDAI Data Hackathon 2026',
+    organization: 'UIDAI',
+    date: '2026',
+    description: 'Participant in the national data strategy hackathon.'
+  },
+  {
+    id: '2',
+    title: 'Google Foundations of Data',
+    organization: 'Google',
+    date: '2025',
+    description: 'Professional certification in data foundations.'
+  }
+];
 
-  return (
-    <div className="px-4 md:px-12 py-12 bg-gradient-to-t from-black to-transparent scroll-mt-20" id="music">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-1.5 h-8 bg-netflix-red rounded-full" />
-        <h2 className="text-white text-2xl md:text-3xl font-black tracking-tighter uppercase italic">My Mix</h2>
-      </div>
+export const PLAYLIST = [
+  {
+    id: 'm1',
+    title: 'Reminder',
+    artist: 'The Weeknd',
+    image: 'https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png',
+    url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/b1/d1/d4/b1d1d4f6-8dce-17a8-3b7b-d5a6e24afae9/mzaf_7736283625894640697.plus.aac.p.m4a'
+  }
+];
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {PLAYLIST.map((track) => (
-          <motion.div
-            key={track.id}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => handleTrackSelect(track)}
-            className={`flex items-center gap-4 p-3 rounded-lg cursor-pointer border border-white/5 transition-all duration-300 ${
-              currentTrack?.id === track.id 
-                ? 'bg-neutral-800 ring-1 ring-netflix-red/40 shadow-lg shadow-netflix-red/10' 
-                : 'bg-neutral-900/50 hover:bg-neutral-800'
-            }`}
-          >
-            <div className="relative w-16 h-16 rounded overflow-hidden flex-shrink-0 shadow-xl group">
-              <img 
-                src={track.image} 
-                alt={track.title} 
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-              />
-              <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity ${currentTrack?.id === track.id && isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                {currentTrack?.id === track.id && isPlaying ? (
-                  <Pause className="w-6 h-6 text-white fill-white" />
-                ) : (
-                  <Play className="w-6 h-6 text-white fill-white ml-1" />
-                )}
-              </div>
-              
-              {currentTrack?.id === track.id && isPlaying && (
-                 <div className="absolute bottom-1 right-1 flex gap-0.5 items-end h-2.5">
-                    <motion.div animate={{ height: [2, 10, 5, 10, 2] }} transition={{ repeat: Infinity, duration: 1 }} className="w-0.5 bg-netflix-red" />
-                    <motion.div animate={{ height: [10, 2, 10, 5, 10] }} transition={{ repeat: Infinity, duration: 1.2 }} className="w-0.5 bg-netflix-red" />
-                    <motion.div animate={{ height: [5, 10, 2, 10, 5] }} transition={{ repeat: Infinity, duration: 0.8 }} className="w-0.5 bg-netflix-red" />
-                 </div>
-              )}
-            </div>
-            
-            <div className="flex-1 min-w-0">
-              <h3 className="text-white font-bold truncate tracking-tight">{track.title}</h3>
-              <p className="text-neutral-500 text-sm truncate">{track.artist}</p>
-            </div>
-            
-            <div className="text-neutral-600 hover:text-white transition-colors pr-2">
-              <Play className={`w-4 h-4 ${currentTrack?.id === track.id && isPlaying ? 'text-netflix-red fill-netflix-red' : ''}`} />
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      <audio
-        ref={audioRef}
-        src={currentTrack?.url}
-        loop
-        onCanPlay={() => {
-          if (isPlaying) audioRef.current?.play().catch(() => {});
-        }}
-        onError={handleError}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-      />
-
-      <AnimatePresence>
-        {currentTrack && (
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 50, opacity: 0 }}
-            className="fixed bottom-24 right-4 md:right-12 z-50 bg-neutral-900/90 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-2xl flex items-center gap-4 w-[300px]"
-          >
-             <div className="w-12 h-12 flex-none rounded-lg overflow-hidden shadow-lg shadow-black/50">
-                <img src={currentTrack.image} alt="" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
-             </div>
-             <div className="flex-1 min-w-0">
-                <p className="text-white text-xs font-black uppercase tracking-wider truncate">{currentTrack.title}</p>
-                <p className="text-neutral-500 text-[10px] truncate">{currentTrack.artist}</p>
-             </div>
-             <div className="flex items-center gap-3 pr-1">
-                <button 
-                  onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }} 
-                  className="text-neutral-400 hover:text-white transition-colors"
-                >
-                  {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                </button>
-                <button 
-                  onClick={(e) => { e.stopPropagation(); setIsPlaying(!isPlaying); }} 
-                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black shadow-lg hover:scale-105 active:scale-95 transition-transform"
-                >
-                  {isPlaying ? <Pause size={20} fill="black" /> : <Play size={20} fill="black" className="ml-0.5" />}
-                </button>
-             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
+export const CONTACT = {
+  github: 'https://github.com/teki-sainadh',
+  phone: '+91 9398163512',
+  email: 'tekisainadh@gmail.com'
+};
