@@ -76,7 +76,7 @@ export default function NetflixTitle({ onComplete }: Props) {
             transition={{ delay: 2, duration: 1 }}
             className="mt-8 text-gray-400 font-medium tracking-widest text-[10px] md:text-xs uppercase"
           >
-            Generative AI & Machine Learning Engineer
+            Cloud AI & Networking Engineer
           </motion.div>
         </motion.div>
       )}
